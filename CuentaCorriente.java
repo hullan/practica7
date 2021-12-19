@@ -35,19 +35,25 @@ public class CuentaCorriente {
             cuentaCorrientes = new CuentaCorriente[Integer.parseInt(fichero.nextLine())];
             int p = 0;
             while(fichero.hasNext()) {
-                String linea = fichero.nextLine().trim().replaceAll(" +", " ");
+                String linea = fichero.nextLine();
                 String[] datos = linea.split(" ");
                 int movimientos = Integer.parseInt(datos[0]);
                 int saldo = 0;
                 int i = 1;
                 while (i <= movimientos) {
-                    saldo = saldo + Integer.parseInt(datos[i]);
+                	if (!datos[i].isEmpty()) {
+                		saldo = saldo + Integer.parseInt(datos[i]);
+                	} else {
+                		movimientos++;
+                	}
                     i++;
                 }
                 int j = movimientos + 1;
                 String cliente = "";
                 while (j < datos.length) {
-                    cliente = cliente + datos[j] + "";
+                	if (!datos[j].isEmpty()) {
+                		cliente = cliente + datos[j] + "";
+                	}
                     j++;
                 }
                 cuentaCorrientes[p] = new CuentaCorriente(cliente, saldo);
