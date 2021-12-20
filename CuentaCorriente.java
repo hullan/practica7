@@ -27,33 +27,33 @@ public class CuentaCorriente {
         return _saldo;
     }
 
-    public static CuentaCorriente[] crearCC (String fileName){
+    public static CuentaCorriente[] crearCC(String fileName) {
         CuentaCorriente[] cuentaCorrientes;
-        try{
+        try {
             Scanner fichero = new Scanner(new FileReader(fileName));
 
             cuentaCorrientes = new CuentaCorriente[Integer.parseInt(fichero.nextLine())];
             int p = 0;
-            while(fichero.hasNext()) {
+            while (fichero.hasNext()) {
                 String linea = fichero.nextLine();
                 String[] datos = linea.split(" ");
                 int movimientos = Integer.parseInt(datos[0]);
                 int saldo = 0;
                 int i = 1;
                 while (i <= movimientos) {
-                	if (!datos[i].isEmpty()) {
-                		saldo = saldo + Integer.parseInt(datos[i]);
-                	} else {
-                		movimientos++;
-                	}
+                    if (datos[i].length() > 0) {
+                        saldo = saldo + Integer.parseInt(datos[i]);
+                    } else {
+                        movimientos++;
+                    }
                     i++;
                 }
                 int j = movimientos + 1;
                 String cliente = "";
                 while (j < datos.length) {
-                	if (!datos[j].isEmpty()) {
-                		cliente = cliente + datos[j] + "";
-                	}
+                    if (datos[j].length() > 0) {
+                        cliente = cliente + datos[j] + "";
+                    }
                     j++;
                 }
                 cuentaCorrientes[p] = new CuentaCorriente(cliente, saldo);
@@ -62,10 +62,10 @@ public class CuentaCorriente {
 
             fichero.close();
             return cuentaCorrientes;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         return null;
     }
 }
